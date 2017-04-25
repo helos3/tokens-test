@@ -1,0 +1,24 @@
+group 'com.idk'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'io.ebean:ebean:10.1.4'
+    compile 'com.sparkjava:spark-core:2.5.5'
+    compile 'com.google.inject:guice:4.0'
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/java'
+    main.java.srcDirs += 'src/test/java'
+    main.allSource.srcDirs.each { it.mkdirs() }
+
+}
