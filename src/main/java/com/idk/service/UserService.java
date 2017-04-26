@@ -1,4 +1,4 @@
-package com.idk.controller;
+package com.idk.service;
 
 import com.idk.domain.Token;
 import com.idk.domain.User;
@@ -15,4 +15,8 @@ public interface UserService {
     Optional<User> createUser(String login, String password);
 
     Optional<Token> authenticate(String login, String password);
+
+    Optional<User> createUser(User user);
+
+    Optional<Token> authenticate(User user);
 }

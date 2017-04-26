@@ -1,6 +1,7 @@
 package com.idk.domain;
 
 import io.ebean.Model;
+import io.ebean.annotation.JsonIgnore;
 import io.ebean.annotation.SoftDelete;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,16 +14,23 @@ import java.util.List;
 /**
  * Created by rushan on 4/25/2017.
  */
-public class User extends Model {
+public class User extends BaseModel<String> {
+
+    public static User find(String login) {
+        return User.find(User.class, login);
+    }
 
     @Id
     private String login;
     @NotNull
     private String password;
-    @NotNull
+
+    @JsonIgnore
     private String salt;
     @SoftDelete
+    @JsonIgnore
     private boolean deleted;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<Token> tokens;
 

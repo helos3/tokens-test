@@ -1,6 +1,7 @@
 package com.idk.domain;
 
 import io.ebean.Model;
+import io.ebean.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Column;
@@ -8,24 +9,29 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rushan on 4/25/2017.
  */
 
-//@Table()
-public class Token extends Model {
+public class Token extends BaseModel<String> {
+
+    public static List<Token> find(String login) {
+        return db().find(Token.class).where().eq("login", login).findList();
+    }
 
     @Id
     private String token;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
-    @NotNull
+    @JsonIgnore
     private Date creationDate;
 
-    @NotNull
+    @JsonIgnore
     private boolean expired;
 
     public Date getCreationDate() {
