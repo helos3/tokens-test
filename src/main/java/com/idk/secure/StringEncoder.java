@@ -11,7 +11,7 @@ public class StringEncoder implements IStringEncoder {
     HashGenerator hasher;
 
     @Inject
-    StringEncoder(HashGenerator hasher) {
+    public StringEncoder(HashGenerator hasher) {
         this.hasher = hasher;
     }
 
@@ -26,6 +26,11 @@ public class StringEncoder implements IStringEncoder {
     @Override
     public String encodeBase64(byte[] input) {
         return Base64.getEncoder().encodeToString(input);
+    }
+
+    @Override
+    public byte[] decodeBase64(String input) {
+        return Base64.getDecoder().decode(input);
     }
 
 

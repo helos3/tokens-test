@@ -2,6 +2,7 @@ package com.idk.service;
 
 import com.idk.domain.Token;
 import com.idk.domain.User;
+import com.idk.secure.SaltGenerator;
 
 import javax.inject.Inject;
 import java.util.Optional;
@@ -11,8 +12,12 @@ import java.util.Optional;
  */
 public class UserServiceImpl implements UserService {
 
+    SaltGenerator saltGenerator;
 
-
+    @Inject
+    public UserServiceImpl(SaltGenerator saltGenerator) {
+        this.saltGenerator = saltGenerator;
+    }
 
 
     @Override

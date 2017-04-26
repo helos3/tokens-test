@@ -6,4 +6,5 @@ package com.idk.secure;
 public interface IStringEncoder {
     String encodeWithSalt(byte[] original, byte[] salt);
     String encodeBase64(byte[] input);
+    byte[] decodeBase64(String input);
 }
