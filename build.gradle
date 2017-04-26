@@ -24,6 +24,7 @@ sourceSets{
     }
     test {
         java.srcDirs += 'src/test/java'
+        java.srcDirs += 'src/main/java'
         resources.srcDirs += 'src/test/resources'
     }
     main.allSource.srcDirs.each { it.mkdirs() }

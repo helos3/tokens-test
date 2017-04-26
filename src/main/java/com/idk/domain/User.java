@@ -20,6 +20,20 @@ public class User extends BaseModel<String> {
         return User.find(User.class, login);
     }
 
+    public static User create(@NotNull String login, @NotNull String password, @NotNull String salt) {
+        User result = new User(login, password, salt);
+        result.save();
+        return result;
+    }
+
+    private User(String login, @NotNull String password, String salt) {
+        this.login = login;
+        this.password = password;
+        this.salt = salt;
+    }
+
+    public User() {}
+
     @Id
     private String login;
     @NotNull
@@ -73,4 +87,7 @@ public class User extends BaseModel<String> {
     public void setTokens(List<Token> tokens) {
         this.tokens = tokens;
     }
+
+
+
 }

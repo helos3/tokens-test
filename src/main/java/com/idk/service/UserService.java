@@ -12,11 +12,10 @@ import java.util.Optional;
  */
 public interface UserService {
 
-    Optional<User> createUser(String login, String password);
+    Optional<Token> register(String login, String password);
 
     Optional<Token> authenticate(String login, String password);
 
-    Optional<User> createUser(User user);
+    Optional<Token> authenticate(String token);
 
-    Optional<Token> authenticate(User user);
 }
