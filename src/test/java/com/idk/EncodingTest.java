@@ -8,9 +8,6 @@ import com.idk.service.UserService;
 import com.idk.service.UserServiceImpl;
 import org.junit.Test;
 
-/**
- * Created by berlogic on 26.04.17.
- */
 
 public class EncodingTest {
 
@@ -28,6 +25,8 @@ public class EncodingTest {
         System.out.println(encoder.encodeWithSalt(password.getBytes(), salt));
 
         System.out.println(encoder.encodeWithSalt(password.getBytes(), salt));
+
+        System.out.println(encoder.encodeWithSalt(password.getBytes(), encoder.decodeBase64(encoder.encodeBase64(salt))));
 
 
     }

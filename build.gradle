@@ -1,21 +1,54 @@
-group 'com.idk'
-version '1.0-SNAPSHOT'
 
+apply plugin: 'com.github.kt3k.ebean.enhance'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
+group 'com.idk'
+version '1.0'
 
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                'Implementation-Version': version,
+                'Main-Class': 'com.idk.Application'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 repositories {
     mavenCentral()
 }
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.kt3k:ebean-enhance-plugin:3.0.0"
+    }
+}
+
+
+
+ebeanEnhance {
+    packages = 'com.idk.domain.*'
+}
+
 dependencies {
-    compile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
     compile 'io.ebean:ebean:10.1.4'
     compile 'com.sparkjava:spark-core:2.5.5' //not the apache
     compile 'com.google.inject:guice:4.0'
-    compile 'org.slf4j:slf4j-simple:1.7.25'
+    compile 'org.slf4j:slf4j-simple:1.8.0-alpha0'
+    compile 'com.alibaba:fastjson:1.2.31'
+    compile 'org.postgresql:postgresql:9.4.1212'
 }
+
+
+
 
 sourceSets{
     main {
@@ -23,6 +56,7 @@ sourceSets{
         resources.srcDirs += 'src/main/resources'
     }
     test {
+        java.srcDirs += 'src/main/java'
         java.srcDirs += 'src/test/java'
         resources.srcDirs += 'src/test/resources'
     }
