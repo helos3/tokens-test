@@ -1,21 +1,28 @@
 package com.idk.service;
 
+import com.idk.utils.Credentials;
 import com.idk.domain.Token;
-import com.idk.domain.User;
-import spark.Spark;
+import com.idk.utils.Pair;
+import com.idk.utils.Status;
 
-import javax.annotation.PostConstruct;
-import java.util.Optional;
-
-/**
- * Created by rushan on 4/25/2017.
- */
 public interface UserService {
 
-    Optional<Token> register(String login, String password);
+    /**
+     * @return Optional.empty() if user already exists
+     */
+    Pair<Status, Token> register(Credentials user);
 
-    Optional<Token> authenticate(String login, String password);
+    /**
+     *
+     * @return Optional.empty() if credentials are wrong
+     */
 
-    Optional<Token> authenticate(String token);
+    Pair<Status, Token> authenticate(Credentials user);
 
+
+    /**
+     *
+     * @return Optional.empty() if token is expired or no such token exists
+     */
+    Pair<Status, String> authenticate(String token);
 }

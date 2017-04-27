@@ -3,16 +3,18 @@ package com.idk.secure;
 import javax.inject.Inject;
 import java.util.Base64;
 
-/**
- * Created by berlogic on 26.04.17.
- */
 public class StringEncoder implements IStringEncoder {
 
-    HashGenerator hasher;
+    private HashGenerator hashGenerator;
+
+    @Override
+    public String encodeWithoutSalt(byte[] original) {
+        return encodeBase64(hashGenerator.hash(original));
+    }
 
     @Inject
-    public StringEncoder(HashGenerator hasher) {
-        this.hasher = hasher;
+    public StringEncoder(HashGenerator hashGenerator) {
+        this.hashGenerator = hashGenerator;
     }
 
 
@@ -20,7 +22,7 @@ public class StringEncoder implements IStringEncoder {
     public String encodeWithSalt(byte[] original, byte[] salt) {
 
         //hash(hash(original) XOR salt)
-        return encodeBase64(hasher.hash(xorWithKey(hasher.hash(original), salt)));
+        return encodeBase64(hashGenerator.hash(xorWithKey(hashGenerator.hash(original), salt)));
     }
 
     @Override

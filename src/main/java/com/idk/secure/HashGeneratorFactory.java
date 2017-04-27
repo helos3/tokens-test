@@ -4,9 +4,6 @@ import com.idk.utils.Unchecked;
 
 import java.security.MessageDigest;
 
-/**
- * Created by berlogic on 26.04.17.
- */
 public class HashGeneratorFactory {
 
     public static HashGenerator getInstance() {
@@ -18,14 +15,15 @@ public class HashGeneratorFactory {
             Unchecked.call(() -> MessageDigest.getInstance(algorithm.name))
                 .digest(input);
     }
-}
 
-enum HashAlgorithm {
-    SHA512("SHA-512"), SHA384("SHA-384"), MD5("MD5");
+    public static enum HashAlgorithm {
+        SHA512("SHA-512"), SHA384("SHA-384"), MD5("MD5");
 
-    HashAlgorithm(String name) {
-        this.name = name;
+        HashAlgorithm(String name) {
+            this.name = name;
+        }
+
+        String name;
     }
-
-    String name;
 }
+

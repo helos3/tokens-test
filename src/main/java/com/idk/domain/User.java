@@ -1,52 +1,35 @@
 package com.idk.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.idk.secure.StringEncoder;
+import io.ebean.Ebean;
 import io.ebean.Model;
 import io.ebean.annotation.JsonIgnore;
 import io.ebean.annotation.SoftDelete;
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.nio.ByteBuffer;
+import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Created by rushan on 4/25/2017.
- */
-public class User extends BaseModel<String> {
+@Entity
+@Table(name="user_") //reserved word in postgres
+public class User extends Model {
 
     public static User find(String login) {
-        return User.find(User.class, login);
+        return Ebean.find(User.class, login);
     }
-
-    public static User create(@NotNull String login, @NotNull String password, @NotNull String salt) {
-        User result = new User(login, password, salt);
-        result.save();
-        return result;
-    }
-
-    private User(String login, @NotNull String password, String salt) {
-        this.login = login;
-        this.password = password;
-        this.salt = salt;
-    }
-
-    public User() {}
 
     @Id
+    @NotNull
     private String login;
     @NotNull
     private String password;
 
-    @JsonIgnore
     private String salt;
     @SoftDelete
-    @JsonIgnore
     private boolean deleted;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.REMOVE)
-    private List<Token> tokens;
 
     public String getLogin() {
         return login;
@@ -79,15 +62,6 @@ public class User extends BaseModel<String> {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-
-    public List<Token> getTokens() {
-        return tokens;
-    }
-
-    public void setTokens(List<Token> tokens) {
-        this.tokens = tokens;
-    }
-
 
 
 }
