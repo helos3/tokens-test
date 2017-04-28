@@ -79,7 +79,6 @@ public class AccountServiceImpl implements AccountService {
             .putLong(hashes)
             .array());
 
-        System.out.println(tokenString.length());
         Token token = new Token();
         token.setAccount(account);
         token.setExpired(false);

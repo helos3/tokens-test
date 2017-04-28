@@ -6,7 +6,9 @@ import com.idk.inject.InjectModule;
 import com.idk.secure.*;
 import com.idk.service.AccountService;
 import com.idk.service.AccountServiceImpl;
+import org.junit.AfterClass;
 import org.junit.Test;
+import spark.Spark;
 
 
 public class EncodingTest {
@@ -28,7 +30,6 @@ public class EncodingTest {
 
         System.out.println(encoder.encodeWithSalt(password.getBytes(), encoder.decodeBase64(encoder.encodeBase64(salt))));
 
-
     }
 
     @Test
@@ -37,8 +38,11 @@ public class EncodingTest {
         Injector injector = Guice.createInjector(new InjectModule());
         AccountService service = injector.getInstance(AccountServiceImpl.class);
         HashGenerator generator = injector.getInstance(HashGenerator.class);
+    }
 
-
+    @AfterClass
+    public static void stop() {
+        Spark.stop();
     }
 
 }
