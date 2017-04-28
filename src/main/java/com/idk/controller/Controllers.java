@@ -45,6 +45,7 @@ public class Controllers {
 
             JSONObject json = new JSONObject();
             res.status(result.left().code());
+            res.header("Content-Type", "application/json");
 
             if (result.left().isFailure()) {
                 json.put("error message", result.left().message());
@@ -69,6 +70,7 @@ public class Controllers {
 
             JSONObject json = new JSONObject();
             res.status(result.left().code());
+            res.header("Content-Type", "application/json");
 
             if (result.left().isFailure()) {
                 json.put("error message", result.left().message());
@@ -94,6 +96,7 @@ public class Controllers {
 
             JSONObject json = new JSONObject();
             res.status(result.left().code());
+            res.header("Content-Type", "application/json");
 
             if (result.left().isFailure()) {
                 json.put("error message", result.left().message());
