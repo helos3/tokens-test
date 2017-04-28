@@ -1,6 +1,7 @@
 
 apply plugin: 'com.github.kt3k.ebean.enhance'
 apply plugin: 'java'
+apply plugin: 'war'
 
 sourceCompatibility = 1.8
 group 'com.idk'
@@ -16,6 +17,14 @@ jar {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+war {
+    webXml = file('src/main/resources/WEB-INF/web.xml')
+//    from {
+//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -31,14 +40,13 @@ buildscript {
     }
 }
 
-
-
 ebeanEnhance {
     packages = 'com.idk.domain.*'
 }
 
 dependencies {
     testCompile 'junit:junit:4.12'
+    testCompile 'org.apache.httpcomponents:httpclient:4.5.2'
     compile 'io.ebean:ebean:10.1.4'
     compile 'com.sparkjava:spark-core:2.5.5' //not the apache
     compile 'com.google.inject:guice:4.0'

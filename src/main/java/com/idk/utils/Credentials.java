@@ -10,7 +10,7 @@ public class Credentials {
 
     public boolean areCorrect() {
         return login != null && login.length() > 3
-            && password != null && password.length() > 5;
+            && password != null && password.length() > 3;
     }
 
     public Credentials(String login, String password) {

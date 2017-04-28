@@ -5,7 +5,7 @@ import com.idk.domain.Token;
 import com.idk.utils.Pair;
 import com.idk.utils.Status;
 
-public interface UserService {
+public interface AccountService {
 
     /**
      * @return Optional.empty() if user already exists

@@ -2,12 +2,10 @@ package com.idk;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.idk.domain.User;
 import com.idk.inject.InjectModule;
 import com.idk.secure.*;
-import com.idk.service.UserService;
-import com.idk.service.UserServiceImpl;
-import io.ebean.Ebean;
+import com.idk.service.AccountService;
+import com.idk.service.AccountServiceImpl;
 import org.junit.Test;
 
 
@@ -16,7 +14,7 @@ public class EncodingTest {
     @Test
     public void encodingTest() {
         Injector injector = Guice.createInjector(new InjectModule());
-        UserService service = injector.getInstance(UserService.class);
+        AccountService service = injector.getInstance(AccountService.class);
         IStringEncoder encoder = injector.getInstance(IStringEncoder.class);
         SaltGenerator generator = injector.getInstance(SaltGenerator.class);
 
@@ -37,7 +35,7 @@ public class EncodingTest {
     public void gooseTest() {
 
         Injector injector = Guice.createInjector(new InjectModule());
-        UserService service = injector.getInstance(UserServiceImpl.class);
+        AccountService service = injector.getInstance(AccountServiceImpl.class);
         HashGenerator generator = injector.getInstance(HashGenerator.class);
 
 

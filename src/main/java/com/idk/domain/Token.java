@@ -2,12 +2,9 @@ package com.idk.domain;
 
 import io.ebean.Ebean;
 import io.ebean.Model;
-import io.ebean.annotation.JsonIgnore;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 
@@ -27,7 +24,7 @@ public class Token extends Model{
 
     @ManyToOne
     @JoinColumn(name = "user_login")
-    private User user;
+    private Account account;
 
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
@@ -51,12 +48,12 @@ public class Token extends Model{
         this.token = token;
     }
 
-    public User getUser() {
-        return user;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public boolean isExpired() {

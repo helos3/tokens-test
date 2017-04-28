@@ -3,11 +3,10 @@ package com.idk.inject;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import com.google.inject.Singleton;
 import com.idk.controller.Controllers;
 import com.idk.secure.*;
-import com.idk.service.UserService;
-import com.idk.service.UserServiceImpl;
+import com.idk.service.AccountService;
+import com.idk.service.AccountServiceImpl;
 
 import java.security.SecureRandom;
 
@@ -28,9 +27,9 @@ public class InjectModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        requestInjection(this);
         bind(Controllers.class).asEagerSingleton();
-        bind(UserService.class).to(UserServiceImpl.class);
+        bind(AccountService.class).to(AccountServiceImpl.class);
         bind(IStringEncoder.class).to(StringEncoder.class);
+        requestInjection(this);
     }
 }

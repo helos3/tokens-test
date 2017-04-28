@@ -17,9 +17,12 @@ import java.util.Properties;
 /**
  * Created by berlogic on 27.04.17.
  */
+
+//embedded
 public class Application {
     public static void main(String[] args) {
         //to trigger injecting and launch services
         Guice.createInjector(new InjectModule());
+
     }
 }

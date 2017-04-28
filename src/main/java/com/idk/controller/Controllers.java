@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.idk.utils.Credentials;
 import com.idk.domain.Token;
-import com.idk.service.UserService;
+import com.idk.service.AccountService;
 import com.idk.utils.Pair;
 import com.idk.utils.Status;
 import spark.Spark;
@@ -15,12 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 
 @Singleton
 public class Controllers {
-    private final UserService userService;
+    private final AccountService accountService;
 
 
     @Inject
-    public Controllers(UserService userService) {
-        this.userService = userService;
+    public Controllers(AccountService accountService) {
+        this.accountService = accountService;
+    }
+
+    @Inject
+    public void init() {
         registerControllers();
     }
 
@@ -31,8 +35,8 @@ public class Controllers {
 
             Credentials credentials = JSON.parseObject(req.body(), Credentials.class);
 
-            Pair<Status, Token> result = credentials.areCorrect() ?
-                userService.register(credentials) :
+            Pair<Status, Token> result = credentials != null && credentials.areCorrect() ?
+                accountService.register(credentials) :
                 Pair.of(
                     Status.of(
                         HttpServletResponse.SC_BAD_REQUEST,
@@ -55,8 +59,8 @@ public class Controllers {
 
             Credentials credentials = JSON.parseObject(req.body(), Credentials.class);
 
-            Pair<Status, Token> result = credentials.areCorrect() ?
-                userService.authenticate(credentials) :
+            Pair<Status, Token> result = credentials != null && credentials.areCorrect() ?
+                accountService.authenticate(credentials) :
                 Pair.of(
                     Status.of(
                         HttpServletResponse.SC_BAD_REQUEST,
@@ -80,7 +84,7 @@ public class Controllers {
             String inputToken = JSON.parseObject(req.body()).getString("token");
 
             Pair<Status, String> result = inputToken != null && inputToken.length() > 10 ?
-                userService.authenticate(inputToken) :
+                accountService.authenticate(inputToken) :
                 Pair.of(
                     Status.of(
                         HttpServletResponse.SC_BAD_REQUEST,

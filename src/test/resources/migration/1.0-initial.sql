@@ -1,3 +1,6 @@
+DROP TABLE if EXISTS token;
+DROP TABLE if exists account;
+
 create table account (
   login                         varchar(255) not null,
   password                      varchar(255),
@@ -16,4 +19,3 @@ create table token (
 
 alter table token add constraint fk_token_user_login foreign key (user_login) references account (login) on delete restrict on update restrict;
 create index ix_token_user_login on token (user_login);
-

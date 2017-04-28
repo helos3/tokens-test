@@ -1,24 +1,17 @@
 package com.idk.domain;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.idk.secure.StringEncoder;
 import io.ebean.Ebean;
 import io.ebean.Model;
-import io.ebean.annotation.JsonIgnore;
 import io.ebean.annotation.SoftDelete;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
-import java.nio.ByteBuffer;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name="user_") //reserved word in postgres
-public class User extends Model {
+public class Account extends Model {
 
-    public static User find(String login) {
-        return Ebean.find(User.class, login);
+    public static Account find(String login) {
+        return Ebean.find(Account.class, login);
     }
 
     @Id
